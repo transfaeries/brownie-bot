@@ -8,6 +8,7 @@ authors = ["transfaeries"]
 python = "^3.9"
 discord = "^1.7.3"
 black = "^22.3.0"
+PyNaCl = "^1.5.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.13.5"
