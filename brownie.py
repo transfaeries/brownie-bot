@@ -27,7 +27,7 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx, *args):
-    """Ping the bot"""
+    """Ping the bot. !ping <text> will return the text also"""
     if args:
         return await ctx.send("pong " + " ".join(args))
     return await ctx.send("pong")
@@ -46,10 +46,11 @@ async def roll(ctx, dice: str):
 
 @bot.command()
 async def post(ctx):
+    """posts a shitpost"""
     return await ctx.send("this is a shitpost")
 
 
-@bot.command(description='For when you wanna settle the score some other way')
+@bot.command(description='For choosing between arbitrary choices')
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     await ctx.send(random.choice(choices))
