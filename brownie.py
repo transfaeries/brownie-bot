@@ -24,8 +24,9 @@ async def on_ready():
     logging.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
     logging.info("------")
 
+
 @bot.event
-async def on_message(ctx):
+async def on_message():
     """runs whenever there's a message the bots can see. I believe"""
     # logging.info(f'{ctx.author} : {ctx.content}')
 
@@ -37,17 +38,19 @@ async def ping(ctx, *args):
         return await ctx.send("pong " + " ".join(args))
     return await ctx.send("pong")
 
+
 @bot.command()
 async def roll(ctx, dice: str):
     """Rolls a dice in NdN format."""
     try:
-        rolls, limit = map(int, dice.split('d'))
+        rolls, limit = map(int, dice.split("d"))
     except Exception:
-        await ctx.send('Format has to be in NdN!')
+        await ctx.send("Format has to be in NdN!")
         return
 
-    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
+    result = ", ".join(str(random.randint(1, limit)) for r in range(rolls))
     await ctx.send(result)
+
 
 @bot.command()
 async def post(ctx):
@@ -55,12 +58,10 @@ async def post(ctx):
     return await ctx.send("this is a shitpost")
 
 
-@bot.command(description='For choosing between arbitrary choices')
+@bot.command(description="For choosing between arbitrary choices")
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     await ctx.send(random.choice(choices))
-    
-
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
