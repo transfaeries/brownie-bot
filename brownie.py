@@ -24,6 +24,11 @@ async def on_ready():
     logging.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
     logging.info("------")
 
+@bot.event
+async def on_message(ctx):
+    """runs whenever there's a message the bots can see. I believe"""
+    # logging.info(f'{ctx.author} : {ctx.content}')
+
 
 @bot.command()
 async def ping(ctx, *args):
