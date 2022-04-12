@@ -16,7 +16,7 @@ intents.members = True
 # intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", description=DESCRIPTION, intents=intents)
-
+username = os.environ["DISCORD_USERNAME"]
 
 @bot.event
 async def on_ready():
@@ -29,6 +29,8 @@ async def on_ready():
 async def on_message():
     """runs whenever there's a message the bots can see. I believe"""
     # logging.info(f'{ctx.author} : {ctx.content}')
+    if ctx.author == self.faeries and ctx.content.startswith("pk;sq"):
+        
 
 
 @bot.command()
