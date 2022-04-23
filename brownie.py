@@ -89,6 +89,7 @@ async def info_error(ctx, error):
     description="Brownies appreciate pets, as long as it doens't interfere with their work"
 )
 async def pet(ctx):
+    """Pet a brownie"""
     await ctx.send("*The little brownie looks at you and smiles as you pet it.*")
 
 
