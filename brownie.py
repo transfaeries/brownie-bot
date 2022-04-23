@@ -25,10 +25,10 @@ async def on_ready():
     logging.info("------")
 
 
-@bot.event
-async def on_message():
-    """runs whenever there's a message the bots can see. I believe"""
-    # logging.info(f'{ctx.author} : {ctx.content}')
+# @bot.event
+# async def on_message():
+#     """runs whenever there's a message the bots can see. I believe"""
+#     # logging.info(f'{ctx.author} : {ctx.content}')
 
 
 @bot.command()
@@ -62,6 +62,34 @@ async def post(ctx):
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     await ctx.send(random.choice(choices))
+
+
+@bot.command(description="For ordering elements randomly")
+async def shuffle(ctx, *choices: str):
+    """randomize the order of a list of multiple elements."""
+    return_list: list[str] = list(choices)
+    random.shuffle(return_list)
+    await ctx.send("\n".join(return_list))
+
+
+@shuffle.error
+async def info_error(ctx, error):
+    if isinstance(error, commands.ExpectedClosingQuoteError):
+        await ctx.send(
+            "Oops, looks like you forgot to close a quote for one of your arguments"
+        )
+
+    if isinstance(error, commands.BadArgument):
+        await ctx.send(
+            "Oops! There was an error in the way that command was parsed. Please try again"
+        )
+
+
+@bot.command(
+    description="Brownies appreciate pets, as long as it doens't interfere with their work"
+)
+async def pet(ctx):
+    await ctx.send("*The little brownie looks at you and smiles as you pet it.*")
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
