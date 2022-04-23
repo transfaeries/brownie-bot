@@ -25,10 +25,10 @@ async def on_ready():
     logging.info("------")
 
 
-@bot.event
-async def on_message():
-    """runs whenever there's a message the bots can see. I believe"""
-    # logging.info(f'{ctx.author} : {ctx.content}')
+# @bot.event
+# async def on_message():
+#     """runs whenever there's a message the bots can see. I believe"""
+#     # logging.info(f'{ctx.author} : {ctx.content}')
 
 
 @bot.command()
@@ -61,6 +61,11 @@ async def post(ctx):
 @bot.command(description="For choosing between arbitrary choices")
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
+    await ctx.send(random.choice(choices))
+
+@bot.command(description="For ordering elements randomly")
+async def randomize(ctx, *choices: str):
+    """randomize the order of a list of multiple elements."""
     await ctx.send(random.choice(choices))
 
 
