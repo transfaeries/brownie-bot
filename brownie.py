@@ -29,7 +29,8 @@ async def on_ready():
 async def on_message():
     """runs whenever there's a message the bots can see. I believe"""
     # logging.info(f'{ctx.author} : {ctx.content}')
-    if ctx.author == self.faeries and ctx.content.startswith("pk;sq"):
+    if ctx.author == self.faeries and ctx.content.startswith("pk;sw"):
+        logging
         
 
 
