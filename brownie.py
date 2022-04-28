@@ -59,9 +59,8 @@ async def shitpost(ctx, *args):
     shitpost_prompt = "A shitpost from the cool freaks wikipedia club:"
     if args:
         shitpost_prompt = " ".join(args)
-    async with ctx.typing():
-        shitpost_text = await utils.generate(shitpost_prompt)
-    return await ctx.send(f"This is a shitpost: \n {shitpost_prompt} {shitpost_text}")
+    shitpost_text = await utils.generate_shitpost(shitpost_prompt)
+    return await ctx.send(f"This is a shitpost: \n{shitpost_prompt} {shitpost_text}")
 
 @bot.command(description="Harness the power of AI to generate completions for any text.")
 async def complete(ctx, *args):
