@@ -4,7 +4,7 @@ import random
 
 import discord
 from discord.ext import commands
-from brownie-utils 
+import utils
 
 
 logging.basicConfig(level=logging.INFO)
@@ -53,11 +53,14 @@ async def roll(ctx, dice: str):
     await ctx.send(result)
 
 
-@bot.command()
-async def post(ctx):
-    """posts a shitpost"""
-    shitpost_text = 
-    return await ctx.send("this is a shitpost")
+@bot.command(description="Harness the power of AI to generate a shitpost.")
+async def shitpost(ctx, *args):
+    """posts a shitpost, can add your own prompt with !shitpost <text>"""
+    shitpost_prompt = ""
+    if args:
+        shitpost_prompt = " ".join(args)
+    shitpost_text = await utils.generate_shitpost(shitpost_prompt)
+    return await ctx.send(f"This is a shitpost: \n {shitpost_prompt} {shitpost_text}")
 
 
 @bot.command(description="For choosing between arbitrary choices")
