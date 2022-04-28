@@ -4,6 +4,7 @@ import random
 
 import discord
 from discord.ext import commands
+from brownie-utils 
 
 
 logging.basicConfig(level=logging.INFO)
@@ -55,6 +56,7 @@ async def roll(ctx, dice: str):
 @bot.command()
 async def post(ctx):
     """posts a shitpost"""
+    shitpost_text = 
     return await ctx.send("this is a shitpost")
 
 
