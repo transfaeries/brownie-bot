@@ -5,7 +5,8 @@ import openai
 import discord
 
 pk = pluralkit.Client(os.getenv('PK_TOKEN',""))
-openai.api_key = os.getenv("OPENAI_API_KEY","")
+openai.api_key = os.getenv("GOOSEAI_API_KEY","")
+openai.api_base = "https://api.goose.ai/v1"
 # log_level=os.environ.get('LOG_LEVEL' ,"INFO")
 logging.basicConfig(level=logging.INFO)
 
@@ -20,10 +21,9 @@ async def pk_switch():
     async for member in members:
         logging.info(f"{member.name} (`{member.id}`)")
 
-async def generate_shitpost(shitpost_prompt : str = "") -> str:
-        prompt = f"A shitpost from the cool freaks wikipedia club: {shitpost_prompt}"
+async def generate(prompt : str = "") -> str:
         response = openai.Completion.create(  # type: ignore
-            engine="curie",
+            engine="gpt-neo-1-3b",
             prompt=prompt,
             temperature=0.9,
             max_tokens=140,

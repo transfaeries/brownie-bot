@@ -56,11 +56,24 @@ async def roll(ctx, dice: str):
 @bot.command(description="Harness the power of AI to generate a shitpost.")
 async def shitpost(ctx, *args):
     """posts a shitpost, can add your own prompt with !shitpost <text>"""
-    shitpost_prompt = ""
+    shitpost_prompt = "A shitpost from the cool freaks wikipedia club:"
     if args:
         shitpost_prompt = " ".join(args)
-    shitpost_text = await utils.generate_shitpost(shitpost_prompt)
+    async with ctx.typing():
+        shitpost_text = await utils.generate(shitpost_prompt)
     return await ctx.send(f"This is a shitpost: \n {shitpost_prompt} {shitpost_text}")
+
+@bot.command(description="Harness the power of AI to generate completions for any text.")
+async def complete(ctx, *args):
+    """type some text to autocomplete with GPT"""
+    
+    if not args:
+        return await ctx.send("You must provide some text for me to complete.")
+    prompt = " ".join(args)
+    async with ctx.typing():
+        response_text = await utils.generate(prompt)
+    return await ctx.send(f"\n {prompt} {response_text}")
+
 
 
 @bot.command(description="For choosing between arbitrary choices")
