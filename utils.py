@@ -5,10 +5,14 @@ import openai
 import discord
 
 pk = pluralkit.Client(os.getenv("PK_TOKEN", ""))
-openai.api_key = os.getenv("GOOSEAI_API_KEY", "")
-openai.api_base = "https://api.goose.ai/v1"
-# log_level=os.environ.get('LOG_LEVEL' ,"INFO")
-logging.basicConfig(level=logging.INFO)
+openai.api_key = os.getenv("OPENAI_API_KEY", "")
+shitpost_engine = os.getenv("SHITPOST_MODEL", "text-curie-001")
+
+# set up logging
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 
 async def pk_switch():
@@ -23,15 +27,16 @@ async def pk_switch():
         logging.info(f"{member.name} (`{member.id}`)")
 
 
-async def generate(prompt: str = "") -> str:
+#Prompts Open AI for a tweet
+def generate(prompt: str = "", engine = "text-curie-001") -> str:
     response = openai.Completion.create(  # type: ignore
-        engine="gpt-neo-1-3b",
+        engine=engine,
         prompt=prompt,
-        temperature=0.9,
-        max_tokens=140,
+        temperature=0.7,
+        max_tokens=50,
         top_p=1,
-        frequency_penalty=0.0,
-        presence_penalty=0.6,
+        frequency_penalty=0.99,
+        presence_penalty=0.3,
         stop=["\n\n"],
     )
     return response["choices"][0]["text"].strip()
